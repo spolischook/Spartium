@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Spolischook\Spartium;
+namespace Spolischook\UploadedFileHandler;
 
 use Intervention\Image\ImageManager;
 

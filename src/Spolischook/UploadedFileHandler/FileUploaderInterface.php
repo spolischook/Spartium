@@ -7,22 +7,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Spolischook\Spartium;
+namespace Spolischook\UploadedFileHandler;
 
 use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 interface FileUploaderInterface
 {
-    /**
-     * @param string $basePath
-     * @return $this
-     */
-    public function setBasePath($basePath);
+    public function isSupported(UploadedFile $file);
 
     /**
-     * @param Request $request
+     * @param UploadedFile $file
      * @return File|null
      */
-    public function upload(Request $request);
+    public function save(UploadedFile $file);
 }

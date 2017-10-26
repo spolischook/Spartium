@@ -7,30 +7,21 @@
  * file that was distributed with this source code.
  */
 
-namespace Spolischook\Spartium;
+namespace Spolischook\UploadedFileHandler;
 
-use Spolischook\Spartium\Model\Image;
-use Symfony\Component\HttpFoundation\Request;
+use Spolischook\UploadedFileHandler\Model\Image;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ImageUploader implements FileUploaderInterface
 {
-    /**
-     * @var ThumbnailMaker
-     */
-    private $thumbnailMaker;
-
-    public function __construct(ThumbnailMaker $thumbnailMaker)
-    {
-        $this->thumbnailMaker = $thumbnailMaker;
-    }
-
     /**
      * @var string
      */
     protected $basePath;
 
     /**
-     * {@inheritdoc}
+     * @param string $basePath
+     * @return $this
      */
     public function setBasePath($basePath)
     {
@@ -43,14 +34,8 @@ class ImageUploader implements FileUploaderInterface
      * {@inheritdoc}
      * @return Image|null
      */
-    public function upload(Request $request)
+    public function save(UploadedFile $file)
     {
-        $files = $request->files;
-
-        if (empty($files->all())) {
-            return null;
-        }
-
         if (!$this->basePath) {
             throw new \InvalidArgumentException('You should specify base path first');
         }

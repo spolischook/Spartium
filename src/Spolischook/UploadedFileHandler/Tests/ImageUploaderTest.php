@@ -7,24 +7,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Spolischook\Spartium\Tests;
+namespace Spolischook\UploadedFileHandler\Tests;
 
 use PHPUnit\Framework\TestCase;
-use Spolischook\Spartium\ImageUploader;
-use Spolischook\Spartium\Model\Image;
+use Spolischook\UploadedFileHandler\ImageUploader;
+use Spolischook\UploadedFileHandler\Model\Image;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\Request;
 
 class ImageUploaderTest extends TestCase
 {
-    public function testEmptyUpload()
-    {
-        $loader = new ImageUploader();
-        $image = $loader->upload(Request::create(''));
-
-        self::assertNull($image);
-    }
-
     /**
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage You should specify base path first
@@ -32,7 +23,7 @@ class ImageUploaderTest extends TestCase
     public function testBasePathException()
     {
         $loader = new ImageUploader();
-        $loader->upload($this->createRequest());
+        $loader->save($this->getUploadedFile());
     }
 
     public function testUpload()
@@ -40,22 +31,24 @@ class ImageUploaderTest extends TestCase
         $loader = new ImageUploader();
         $loader->setBasePath(sys_get_temp_dir());
 
-        $request = $this->createRequest();
-        $image = $loader->upload($request);
+        $request = $this->getUploadedFile();
+        $image = $loader->save($request);
 
         self::assertInstanceOf(Image::class, $image);
     }
 
     /**
-     * @return Request
+     * @return UploadedFile
      */
-    private function createRequest()
+    private function getUploadedFile()
     {
-        $request = Request::create('');
-        $request->files->add([
-            new UploadedFile(__DIR__.'/files/1024px-Spartium_junceum_Colmenar_Viejo_1.jpg', '', null, null, null, true)
-        ]);
-
-        return $request;
+         return new UploadedFile(
+             __DIR__.'/files/1024px-Spartium_junceum_Colmenar_Viejo_1.jpg',
+             '',
+             null,
+             null,
+             null,
+             true
+         );
     }
 }

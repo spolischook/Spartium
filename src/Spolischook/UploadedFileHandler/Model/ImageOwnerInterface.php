@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Spolischook\Spartium\Model;
+namespace Spolischook\UploadedFileHandler\Model;
 
 interface ImageOwnerInterface
 {
