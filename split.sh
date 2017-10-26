@@ -3,7 +3,7 @@
 TEMP_PROJECT_DIR=/tmp/project
 BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
 FOLDER_NAME=src/Spolischook/Spartium
-REPOSITORY_URL=git@github.com:spolischook/Spartium.git
+REPOSITORY_URL=git@github.com:spolischook/UploadedFileHandler.git
 
 rm -rf $TEMP_PROJECT_DIR
 cp -r ./ $TEMP_PROJECT_DIR
