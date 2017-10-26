@@ -14,6 +14,10 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 interface FileUploaderInterface
 {
+    /**
+     * @param UploadedFile $file
+     * @return bool
+     */
     public function isSupported(UploadedFile $file);
 
     /**

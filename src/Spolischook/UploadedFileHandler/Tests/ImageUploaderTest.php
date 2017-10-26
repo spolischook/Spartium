@@ -31,8 +31,8 @@ class ImageUploaderTest extends TestCase
         $loader = new ImageUploader();
         $loader->setBasePath(sys_get_temp_dir());
 
-        $request = $this->getUploadedFile();
-        $image = $loader->save($request);
+        $uploadedFile = $this->getUploadedFile();
+        $image = $loader->save($uploadedFile);
 
         self::assertInstanceOf(Image::class, $image);
     }

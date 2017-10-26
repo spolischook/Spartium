@@ -14,6 +14,11 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class ImageUploader implements FileUploaderInterface
 {
+    protected $mimeTypes = [
+        'image/png',
+        'image/jpeg',
+    ];
+
     /**
      * @var string
      */
@@ -28,6 +33,14 @@ class ImageUploader implements FileUploaderInterface
         $this->basePath = $basePath;
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isSupported(UploadedFile $file)
+    {
+        return in_array($file->getMimeType(), $this->mimeTypes);
     }
 
     /**
