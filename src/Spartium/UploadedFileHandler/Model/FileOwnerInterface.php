@@ -7,9 +7,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Spolischook\UploadedFileHandler\Model;
+namespace Spartium\UploadedFileHandler\Model;
 
-interface ImageOwnerInterface
+interface FileOwnerInterface
 {
     /**
      * Returns unique identify of image owner, e.g. user

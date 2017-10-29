@@ -7,12 +7,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Spolischook\UploadedFileHandler;
+namespace Spartium\UploadedFileHandler\Handlers\Image;
 
-use Spolischook\UploadedFileHandler\Model\Image;
+use Spartium\UploadedFileHandler\AbstractUploader;
+use Spartium\UploadedFileHandler\FileUploaderInterface;
+use Spartium\UploadedFileHandler\Model\Image;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class ImageUploader implements FileUploaderInterface
+class ImageUploader extends AbstractUploader implements FileUploaderInterface
 {
     protected $mimeTypes = [
         'image/png',
@@ -38,21 +40,23 @@ class ImageUploader implements FileUploaderInterface
     /**
      * {@inheritdoc}
      */
-    public function isSupported(UploadedFile $file)
+    protected function getAcceptedMimeTypes()
     {
-        return in_array($file->getMimeType(), $this->mimeTypes);
+        return $this->mimeTypes;
     }
 
     /**
      * {@inheritdoc}
      * @return Image|null
      */
-    public function save(UploadedFile $file)
+    public function save(UploadedFile $file, $name = null)
     {
         if (!$this->basePath) {
             throw new \InvalidArgumentException('You should specify base path first');
         }
 
-        return new Image('/', false);
+        $newFile = $file->move($this->basePath, $name);
+
+        return new Image($newFile->getRealPath());
     }
 }

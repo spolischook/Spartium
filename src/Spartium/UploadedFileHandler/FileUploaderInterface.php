@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Spolischook\UploadedFileHandler;
+namespace Spartium\UploadedFileHandler;
 
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -15,14 +15,16 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 interface FileUploaderInterface
 {
     /**
-     * @param UploadedFile $file
+     * @param string $mimeType
      * @return bool
      */
-    public function isSupported(UploadedFile $file);
+    public function isSupported(string $mimeType);
 
     /**
      * @param UploadedFile $file
+     * @param string $name The new file name
+     *
      * @return File|null
      */
-    public function save(UploadedFile $file);
+    public function save(UploadedFile $file, $name = null);
 }
