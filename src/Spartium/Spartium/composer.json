@@ -19,7 +19,7 @@
     },
     "autoload": {
         "psr-4": {
-            "\\": "src/"
+            "Spartium\\Spartium\\": "src/"
         }
     },
     "repositories": [
