@@ -1,0 +1,17 @@
+{
+    "name": "spolischook/spartium",
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.1",
+        "phpunit/phpunit": "^6.4",
+        "phpmd/phpmd": "^2.6"
+    },
+    "authors": [
+        {
+            "name": "Serhii Polishchuk",
+            "email": "spolishchuk@oroinc.com"
+        }
+    ],
+    "config": {
+        "bin-dir": "bin"
+    }
+}
