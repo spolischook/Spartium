@@ -1,0 +1,22 @@
+language: php
+
+cache:
+  directories:
+    - $HOME/.composer/cache/files
+
+matrix:
+  fast_finish: true
+  include:
+#    - php: '7.1'
+#      env: TARGET=phpcs
+#    - php: '7.1'
+#      env: TARGET=phpmd
+    - php: '7.1'
+      env: TARGET=phpunit
+
+before_script:
+  - composer self-update
+  - composer install --working-dir=src/Spartium/UploadedFileHandler
+
+script:
+  - if [ "$TARGET" = "phpunit" ]; then phpunit -c src/Spartium/UploadedFileHandler/phpunit.xml --coverage-clover=coverage.clover; fi
