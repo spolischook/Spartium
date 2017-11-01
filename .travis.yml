@@ -21,5 +21,5 @@ before_script:
 script:
   - if [ "$TARGET" = "phpunit" ]; then composer install --working-dir=src/Spartium/UploadedFileHandler; fi
   - if [ "$TARGET" = "phpunit" ]; then phpunit -c src/Spartium/UploadedFileHandler/phpunit.xml --coverage-clover=coverage.clover; fi
-  - if [ "$TARGET" = "phpmd" ]; then bin/phpmd src text ~/rulesetMD.xml --suffixes php; fi
-  - if [ "$TARGET" = "phpcs" ]; then bin/phpcs $PWD --standard=PSR2 php; fi
+  - if [ "$TARGET" = "phpmd" ]; then bin/phpmd src text ./phpmd-ruleset.xml --suffixes php; fi
+  - if [ "$TARGET" = "phpcs" ]; then bin/phpcs $PWD/src --standard=PSR2; fi
