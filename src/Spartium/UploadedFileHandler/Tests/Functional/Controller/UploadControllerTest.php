@@ -9,6 +9,7 @@
 
 namespace Spartium\UploadedFileHandler\Tests\Functional;
 
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
 
 class UploadControllerTest extends WebTestCase
@@ -34,5 +35,20 @@ class UploadControllerTest extends WebTestCase
         }
 
         $this->assertEquals(Response::HTTP_NO_CONTENT, $client->getResponse()->getStatusCode());
+    }
+
+    public function testUploadRequest()
+    {
+        $client = $this->createClient();
+        $client->followRedirects();
+
+        $files = [new UploadedFile(
+            realpath(__DIR__.'/../../files/1024px-Spartium_junceum_Colmenar_Viejo_1.jpg'),
+            'Spartium_junceum_Colmenar_Viejo_1.jpg'
+        )];
+
+        $client->request('POST', '/files/upload', [], $files, ['HTTP_ACCEPT' => 'application/json']);
+
+        $this->assertEquals(Response::HTTP_CREATED, $client->getResponse()->getStatusCode());
     }
 }
